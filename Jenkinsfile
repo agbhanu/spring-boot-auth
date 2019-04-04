@@ -10,6 +10,10 @@ pipeline{
         sh "./gradlew clean"
       }
     }
+    stage('Initialize'){
+      def dockerHome = tool 'Docker'
+      env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
     stage("build docker image"){
       steps{
         echo 'Starting to build docker image'
