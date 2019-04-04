@@ -6,6 +6,13 @@ pipeline{
    }
  }
  stages{
+
+    stage("install libltdl7"){
+      steps{
+        sh "apt-get update"
+        sh "apt-get install -y libltdl7"
+      }
+    }
     stage("clean project"){
       steps{
         sh "./gradlew clean"
