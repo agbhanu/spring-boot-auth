@@ -5,9 +5,9 @@ pipeline{
    }
  }
  stages{
-    stage("clean project"){
+    stage("build docker image"){
       steps{
-        sh "./gradlew clean"
+        docker.build("spring-boot-image")
       }
     }
  }
