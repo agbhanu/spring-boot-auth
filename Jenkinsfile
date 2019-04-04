@@ -1,6 +1,7 @@
 pipeline{
  agent{
    docker{
+     args '-v /usr/bin/docker:/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock'
      image 'gradle:jdk8-slim'
    }
  }
@@ -8,14 +9,6 @@ pipeline{
     stage("clean project"){
       steps{
         sh "./gradlew clean"
-      }
-    }
-    stage('Initialize'){
-      steps{
-        script{
-          def dockerHome = tool 'Docker'
-          env.PATH = "${dockerHome}/bin:${env.PATH}"
-        }
       }
     }
     stage("build docker image"){
