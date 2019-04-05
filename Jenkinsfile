@@ -18,6 +18,11 @@ pipeline{
         sh "./gradlew clean"
       }
     }
+    stage("Build project"){
+      steps{
+        sh "./gradlew build"
+      }
+    }
     stage("build docker image"){
       steps{
         echo 'Starting to build docker image'
