@@ -38,7 +38,7 @@ pipeline{
         echo 'Starting to push docker image'
           script{
             docker.withRegistry('https://git.persistent.co.in' , 'gitlab_cred'){
-              customImage.push("${env.BUILD_NUMBER}")
+              customImage.push("latest")
             }
           }
       }
