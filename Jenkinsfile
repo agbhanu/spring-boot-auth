@@ -24,20 +24,20 @@ pipeline{
         sh "./gradlew build"
       }
     }
-    stage("build docker image"){
-      steps{
-        echo 'Starting to build docker image'
+    //stage("build docker image"){
+      //steps{
+        //echo 'Starting to build docker image'
 
-          script {
-             customImage = docker.build("git.persistent.co.in:4567/testgroup/springboot-docker-sample")
-          }
-      }
-    }
-    stage("push docker image"){
+          //script {
+
+          //}
+      //}
+    //}
+    stage("build and push docker image"){
       steps{
-        echo 'Starting to push docker image'
           script{
             docker.withRegistry('https://git.persistent.co.in' , 'gitlab_cred'){
+              customImage = docker.build("git.persistent.co.in:4567/testgroup/springboot-docker-sample")
               customImage.push("latest")
             }
           }
