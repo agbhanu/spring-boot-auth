@@ -1,3 +1,4 @@
+def customImage
 pipeline{
  agent{
    docker{
@@ -28,7 +29,16 @@ pipeline{
         echo 'Starting to build docker image'
 
           script {
-            def customImage = docker.build("sample-image")
+             customImage = docker.build("git.persistent.co.in:4567/testgroup/springboot-docker-sample")
+          }
+      }
+    }
+    stage("push docker image"){
+      steps{
+        echo 'Starting to push docker image'
+
+          docker.withRegistry('https://git.persistent.co.in','	gitlab_cred'){
+            customImage.push('${env.BUILD_NUMBER}')
           }
       }
     }
