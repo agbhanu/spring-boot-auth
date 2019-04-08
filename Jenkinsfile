@@ -38,7 +38,7 @@ pipeline{
           script{
             docker.withRegistry('https://git.persistent.co.in' , 'gitlab_cred'){
               customImage = docker.build("git.persistent.co.in:4567/testgroup/springboot-docker-sample")
-              customImage.push("latest")
+              customImage.push()
             }
           }
       }
