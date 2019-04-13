@@ -16,12 +16,12 @@ pipeline{
     //}
     stage("clean project"){
       steps{
-        sh "./gradle clean"
+        sh "./gradlew clean"
       }
     }
     stage("Build project"){
       steps{
-        sh "./gradlew build"
+        sh "./gradle build"
       }
     }
     //stage("build docker image"){
