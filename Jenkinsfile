@@ -33,15 +33,30 @@ pipeline{
           //}
       //}
     //}
-    stage("build and push docker image"){
-      steps{
-          script{
-            docker.withRegistry('https://git.persistent.co.in:4567' , 'gitlab_cred'){
-              customImage = docker.build("git.persistent.co.in:4567/testgroup/springboot-docker-sample")
-              customImage.push()
-            }
-          }
-      }
-    }
+    //stage("build and push docker image"){
+      //steps{
+          //script{
+            //docker.withRegistry('https://git.persistent.co.in:4567' , 'gitlab_cred'){
+              //customImage = docker.build("git.persistent.co.in:4567/testgroup/springboot-docker-sample")
+              //customImage.push()
+            //}
+          //}
+      //}
+    //}
+ }
+
+ post{
+   success{
+     slackSend (
+        color: '#006400',
+        message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
+     )
+   }
+   failure{
+     slackSend (
+        color: '#8B0000',
+        message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
+     )
+   }
  }
 }
