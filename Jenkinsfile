@@ -8,20 +8,20 @@ pipeline{
  }
  stages{
 
-    stage("install libltdl7"){
-      steps{
-        sh "apt-get update"
-        sh "apt-get install -y libltdl7"
-      }
-    }
+    //stage("install libltdl7"){
+      //steps{
+        //sh "apt-get update"
+        //sh "apt-get install -y libltdl7"
+      //}
+    //}
     stage("clean project"){
       steps{
-        sh "./gradlew clean"
+        sh "./gradle clean"
       }
     }
     stage("Build project"){
       steps{
-        sh "./gradle build"
+        sh "./gradlew build"
       }
     }
     //stage("build docker image"){
