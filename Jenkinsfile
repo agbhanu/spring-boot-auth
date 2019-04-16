@@ -1,9 +1,10 @@
 def customImage
 pipeline{
  agent{
-   label 'ubuntu' {
+    {
      docker{
        args '-v /usr/bin/docker:/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock'
+       label 'ubuntu'
        image 'gradle:jdk8-slim'
      }
    }
