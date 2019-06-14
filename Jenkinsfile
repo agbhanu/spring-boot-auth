@@ -23,6 +23,21 @@ pipeline{
         sh "./gradlew build"
       }
     }
+
+    stage("Build docker image"){
+      steps{
+        sh "docker build -t 10.244.48.72:8123/spring-boot-auth ."
+        sh "docker tag 10.244.48.72:8123/spring-boot-auth 10.244.48.72:8123/spring-boot-auth:${env.BUILD_NUMBER}"
+      }
+    }
+
+    stage("Push docker image to nexus"){
+      steps{
+         withDockerRegistry([credentialsId: 'nexus_cred', url: 'http://10.244.48.72:8123']) {
+            sh "docker push 10.244.48.72:8123/spring-boot-auth"
+         }
+      }
+    }
     //stage("build docker image"){
       //steps{
         //echo 'Starting to build docker image'
